@@ -1,0 +1,23 @@
+services:
+  api:
+    container_name: android-api
+    restart: always
+    build: .
+    ports:
+      - "3001:3001"
+    expose:
+      - "3001"
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo-backend
+    image: mongo
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    volumes:
+      - apiDB:/data/db
+
+volumes:
+  apiDB:
